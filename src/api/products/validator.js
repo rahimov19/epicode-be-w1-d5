@@ -41,7 +41,7 @@ export const triggerBadRequest = (req, res, next) => {
   if (!errors.isEmpty()) {
     next(
       createHttpError(400, "Errors during product validation", {
-        errorsList: errors.array(),
+        errorList: errors.array(),
       })
     );
   } else {

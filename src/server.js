@@ -23,7 +23,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use("/products", productsRouter);
-server.use("/", filesRouter);
+server.use("/products", filesRouter);
 server.use("/products", reviewsRouter);
 
 server.use(badRequestHanlder);

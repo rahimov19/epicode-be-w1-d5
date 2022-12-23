@@ -1,6 +1,11 @@
 export const badRequestHanlder = (err, req, res, next) => {
   if ((err.status = 400)) {
-    res.status(400).send({ message: err.message });
+    const errorMsgArray = err.errorList.map((error) => error.msg);
+
+    res.status(400).send({
+      message: err.message,
+      errorList: errorMsgArray,
+    });
   } else {
     next(err);
   }
