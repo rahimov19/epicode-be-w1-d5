@@ -1,11 +1,12 @@
-export const badRequestHanlder = (err, req, res, next) => {
-  if ((err.status = 400)) {
-    const errorMsgArray = err.errorList.map((error) => error.msg);
+import mongoose from "mongoose";
 
-    res.status(400).send({
-      message: err.message,
-      errorList: errorMsgArray,
-    });
+export const badRequestHandler = (err, req, res, next) => {
+  if (err.status === 400 || err instanceof mongoose.Error.ValidationError) {
+    res.status(400).send({ message: err.message });
+  } else if (err instanceof mongoose.Error.CastError) {
+    res
+      .status(400)
+      .send({ message: "You've sent a wrong _id in request params" });
   } else {
     next(err);
   }
